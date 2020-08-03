@@ -12,9 +12,23 @@ const RecipeSchema = new mongoose.Schema({
     },
     ingredients: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Ingredient',
-            required: true
+            ingredientId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Ingredient',
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true,
+                min: 1,
+                max: 999
+            },
+            unit: {
+                type: String,
+                enum: ['kg', 'unidad'],
+                required: true,
+                default: 'unidad'
+            }
         }
     ],
     createdAt: { type: Date, default: formatDate(moment().tz('America/Mexico_City').format()) },

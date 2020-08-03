@@ -10,7 +10,14 @@ const IngredientSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    price: {
+    kilogramPrice: {
+        type: Number,
+        required: true,
+        default: 0,
+        min: 0,
+        max: 999
+    },
+    unitPrice: {
         type: Number,
         required: true,
         default: 0,

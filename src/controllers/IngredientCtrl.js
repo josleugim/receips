@@ -25,8 +25,12 @@ const create = async (req, res) => {
         data.name = req.body.name;
     }
 
-    if (req.body.price) {
-        data.price = req.body.price;
+    if (req.body.kilogramPrice) {
+        data.kilogramPrice = req.body.kilogramPrice;
+    }
+
+    if (req.body.unitPrice) {
+        data.unitPrice = req.body.unitPrice;
     }
 
     const ingredient = await Ingredient.create(data);
@@ -44,19 +48,34 @@ const update = async (req, res) => {
         data.name = req.body.name;
     }
 
-    if (req.body.price) {
-        data.price = req.body.price;
+    if (req.body.kilogramPrice) {
+        data.kilogramPrice = req.body.kilogramPrice;
+    }
+
+    if (req.body.unitPrice) {
+        data.unitPrice = req.body.unitPrice;
     }
 
     const ingredient = await Ingredient
         .findByIdAndUpdate(req.body.id, data, { new: true })
-        .catch(err => console.error(err))
+        .catch(err => console.error(err));
 
     res.status(200).json({ success: true, ingredient: ingredient })
+}
+
+const getById = async (req, res) => {
+    if (!req.params.id) { return res.status(404).json({ success: false, message: 'No ID provided' }) }
+
+    const ingredient = await Ingredient
+        .findById(req.params.id, { name: 1, unitPrice: 1, kilogramPrice: 1 })
+        .catch(err => console.error(err));
+
+    res.status(200).json({ success: true, ingredient: ingredient });
 }
 
 module.exports = {
     listAll,
     create,
-    update
+    update,
+    getById
 }
