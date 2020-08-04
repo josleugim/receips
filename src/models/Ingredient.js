@@ -30,6 +30,9 @@ const IngredientSchema = new mongoose.Schema({
 });
 
 IngredientSchema.set('toObject', { getters: true, virtuals: true });
+IngredientSchema.set('toJSON', {
+    virtuals: true
+});
 
 IngredientSchema.virtual('updatedAtFormat').get(function () {
     return moment(this.updatedAt).tz('America/Mexico_City').locale('es').format('LL')

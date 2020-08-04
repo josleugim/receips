@@ -8,8 +8,15 @@ const listAll = async (req, res) => {
         isActive: true
     };
 
+    const projection = {
+        name: 1,
+        kilogramPrice: 1,
+        unitPrice: 1,
+        updatedAtFormat: 1
+    }
+
     const ingredients = await Ingredient
-        .find(query)
+        .find(query, projection)
         .sort({ name: -1 })
         .catch(e => console.error(e));
 
