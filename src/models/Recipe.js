@@ -37,6 +37,9 @@ const RecipeSchema = new mongoose.Schema({
 })
 
 RecipeSchema.set('toObject', { getters: true, virtuals: true });
+RecipeSchema.set('toJSON', {
+    virtuals: true
+});
 
 RecipeSchema.virtual('updatedAtFormat').get(function () {
     return moment(this.updatedAt).tz('America/Mexico_City').locale('es').format('LL')

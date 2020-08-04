@@ -26,7 +26,8 @@ const estimateIngredientsCost = (recipes) => {
             cost: ingredients.reduce((acc, ingredient) => {
                 acc = acc + ingredient.cost;
                 return acc
-            },0)
+            },0),
+            updatedAtFormat: recipe.updatedAtFormat
         }
     })
 }

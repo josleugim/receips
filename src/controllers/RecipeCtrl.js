@@ -9,8 +9,15 @@ const listAll = async(req, res) => {
         isActive: true
     };
 
+    const projection = {
+        title: 1,
+        recipeId: 1,
+        ingredients: 1,
+        updatedAtFormat: 1
+    }
+
     const recipes = await Recipe
-        .find(query)
+        .find(query, projection)
         .sort({ _id: -1 })
         .populate({
             path: 'ingredients.ingredientId',
